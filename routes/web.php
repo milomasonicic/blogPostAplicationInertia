@@ -4,6 +4,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\PostContorller;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -39,6 +40,17 @@ Route::middleware('auth')->group(function () {
 Route::get("/posts", function() {
     return Inertia::render('blogPosts', ['posts' => Post::all()]);
 });
+
+Route::get("/create", function() {
+    return Inertia::render('create');
+});
+
+Route::get("/list", function() {
+    $posts = Post::all();
+    return Inertia::render('list', ['posts' => $posts]);
+})->name('list');
+
+Route::post('/postStore', [PostContorller::class, 'store']);
 
 Route::get("/singlePage/{id}", function($id) {
     return Inertia::render('singlePost', ["post"=>Post::find($id)]);

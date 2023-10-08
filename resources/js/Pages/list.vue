@@ -8,26 +8,27 @@ export default{
         posts:{
             type:Object
         }
-    }, 
+    },
+   
     components:{
         Link,
         navigation
     }
 }
-
 </script>
+
 
 <template>
     <navigation></navigation>
-    <h1>Posts</h1>
+    <h1>List of posts</h1>
 
     <div v-for="post in posts" :key="post.id">
+        <li>
+
+            <Link :href="route('singlePost', { id: post.id })"> {{ post.title }}</Link>
+        </li>
         
-        <h1> {{ post.title }}</h1>
-        <p> {{ post.content }}</p>
-        
-        <Link :href="route('singlePost', { id: post.id })"> View Post</Link>
+      
 
     </div>
-
 </template>
